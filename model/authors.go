@@ -7,9 +7,9 @@ type CreateAuthorRequest struct {
 	LastName  string `json:"lastName"`
 }
 
-// CreateAuthorResponse is the response body when
-// creating an author
-type CreateAuthorResponse struct {
+// AuthorResponse is the response body when
+// requesting an author
+type AuthorResponse struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	UUID      string `json:"uuid"`

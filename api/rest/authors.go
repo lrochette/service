@@ -27,3 +27,16 @@ func (r *authorsResource) CreateAuthor(request *restful.Request, response *restf
 
 	response.WriteHeaderAndEntity(http.StatusCreated, res)
 }
+
+// GetAuthor is the decoding/error layer to create an author
+func (r *authorsResource) GetAuthor(request *restful.Request, response *restful.Response) {
+	authorID := request.PathParameter("author-id")
+	ctx := context.Background()
+
+	res, err := r.service.GetAuthor(ctx, authorID)
+	if err != nil {
+		encodeErrorWithStatus(response, err, http.StatusBadRequest)
+	}
+
+	response.WriteHeaderAndEntity(http.StatusOK, res)
+}

@@ -9,7 +9,8 @@ import (
 
 // AuthorsService holds methods related to authors
 type AuthorsService interface {
-	CreateAuthor(ctx context.Context, author *model.CreateAuthorRequest) (*model.CreateAuthorResponse, error)
+	CreateAuthor(ctx context.Context, author *model.CreateAuthorRequest) (*model.AuthorResponse, error)
+	GetAuthor(ctx context.Context, authorID string) (*model.AuthorResponse, error)
 }
 
 type authorsService struct {
@@ -17,7 +18,7 @@ type authorsService struct {
 }
 
 // CreateAuthor creates an author
-func (s *authorsService) CreateAuthor(ctx context.Context, author *model.CreateAuthorRequest) (*model.CreateAuthorResponse, error) {
+func (s *authorsService) CreateAuthor(ctx context.Context, author *model.CreateAuthorRequest) (*model.AuthorResponse, error) {
 	dbAuthor := translateCreateAuthorRequestToDBAuthor(author)
 
 	// generate uuid
@@ -29,7 +30,19 @@ func (s *authorsService) CreateAuthor(ctx context.Context, author *model.CreateA
 		return nil, err
 	}
 
-	response := translateDBAuthorToCreateAuthorResponse(dbAuthor)
+	response := translateDBAuthorToAuthorResponse(dbAuthor)
+
+	return response, nil
+}
+
+// GetAuthor gets an author from the db and translates it to a response
+func (s *authorsService) GetAuthor(ctx context.Context, authorID string) (*model.AuthorResponse, error) {
+	dbAuthor, err := s.db.GetAuthor(ctx, authorID)
+	if err != nil {
+		return nil, err
+	}
+
+	response := translateDBAuthorToAuthorResponse(dbAuthor)
 
 	return response, nil
 }

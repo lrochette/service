@@ -12,8 +12,8 @@ func translateCreateAuthorRequestToDBAuthor(author *model.CreateAuthorRequest) *
 	}
 }
 
-func translateDBAuthorToCreateAuthorResponse(dbAuthor *dbmodel.Author) *model.CreateAuthorResponse {
-	return &model.CreateAuthorResponse{
+func translateDBAuthorToAuthorResponse(dbAuthor *dbmodel.Author) *model.AuthorResponse {
+	return &model.AuthorResponse{
 		FirstName: dbAuthor.FirstName,
 		LastName:  dbAuthor.LastName,
 		UUID:      dbAuthor.UUID,
