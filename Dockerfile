@@ -21,5 +21,7 @@ FROM alpine:3.10
 RUN apk add --no-cache ca-certificates bash
 # copy binary
 COPY --from=builder /app /
+# copy db migrations
+COPY --from=builder /app/db/migrations /migrations
 
 CMD ./service

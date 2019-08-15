@@ -6,6 +6,7 @@ import (
 	restful "github.com/emicklei/go-restful"
 )
 
+// APIError is the returned error
 type APIError struct {
 	Message string `json:"message"`
 }

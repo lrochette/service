@@ -5,3 +5,14 @@ services:
     ports:
       - 8080:8080
     env_file: dev.env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:11.5
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: development
+      POSTGRES_DB: blog

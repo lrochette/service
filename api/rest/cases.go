@@ -3,14 +3,15 @@ package rest
 import (
 	"net/http"
 
+	"github.com/JPZ13/service/model"
 	restful "github.com/emicklei/go-restful"
-	"github.com/jpz13/service/model"
 )
 
 type dummyResource struct {
 	baseResource
 }
 
+// DummyFunction is a placeholder
 func (r *dummyResource) DummyFunction(request *restful.Request, response *restful.Response) {
 	dummyRequest := new([]model.DummyRequest)
 	if !decodeRequest(request, response, dummyRequest) {

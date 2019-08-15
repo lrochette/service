@@ -8,8 +8,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jpz13/service/api"
-	"github.com/jpz13/service/core"
+	"github.com/JPZ13/service/api"
+	"github.com/JPZ13/service/core"
+	"github.com/JPZ13/service/db"
 )
 
 type server struct {
@@ -27,7 +28,23 @@ type serverConfig struct {
 }
 
 func newServer(config *serverConfig) (*server, error) {
-	dummyService := core.NewDummyService(&core.Config{})
+	db, err := db.New(&db.Config{
+		Driver:     *dbDriver,
+		Username:   *dbUser,
+		Password:   *dbPassword,
+		Host:       *dbHost,
+		DBName:     *dbName,
+		SSLMode:    *dbSSLMode,
+		MaxRetries: *dbMaxRetries,
+		Port:       *dbPort,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	dummyService := core.NewDummyService(&core.Config{
+		DB: db,
+	})
 
 	apiHandler := api.New(&api.Config{
 		DummyService: dummyService,

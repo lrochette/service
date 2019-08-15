@@ -1,0 +1,6 @@
+CREATE TABLE author (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  first_name VARCHAR(32),
+  last_name VARCHAR(32),
+  uuid CHAR(64) UNIQUE
+);

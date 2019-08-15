@@ -4,16 +4,18 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/JPZ13/service/api/rest"
+	"github.com/JPZ13/service/core"
 	restful "github.com/emicklei/go-restful"
-	"github.com/jpz13/service/api/rest"
-	"github.com/jpz13/service/core"
 )
 
+// Config holds api configuration
 type Config struct {
 	DummyService core.DummyService
 	Logger       log.Logger
 }
 
+// New inits an api
 func New(config *Config) http.Handler {
 
 	resources := rest.NewResources(&rest.Config{
