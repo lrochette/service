@@ -1,0 +1,48 @@
+#!/bin/bash
+
+build_image() {
+  docker build -t namespace/service-name -f ./Dockerfile ./
+}
+
+run_compose() {
+  docker-compose -f ./infra/docker-compose.dev.yml "$@"
+}
+
+run_on_go_files() {
+  go "$@" ./...
+}
+
+for arg in "$@"
+do
+  case $arg in
+    image)
+      build_image
+    ;;
+    compose-up)
+      run_compose down
+      run_compose up
+    ;;
+    compose-down)
+      run_compose down
+    ;;
+    compose-logs)
+      run_compose logs
+    ;;
+    test)
+      run_on_go_files test -v
+    ;;
+    test-integration)
+      run_compose down
+      run_compose up -d
+      sleep 5s
+      run_on_go_files test -tags=integration -v
+    ;;
+    fmt)
+      run_on_go_files test -v
+    ;;
+    vet)
+      run_on_go_files test -v
+    ;;
+  esac
+done
+
