@@ -30,6 +30,11 @@ type Config struct {
 
 // Database holds methods to interact with the db
 type Database interface {
+	Authors
+}
+
+type queries struct {
+	authorsQueries
 }
 
 type database struct {
@@ -52,8 +57,12 @@ func New(config *Config) (Database, error) {
 
 	sqlxDB := sqlx.NewDb(db, config.Driver)
 
-	return &database{
+	baseDB := database{
 		db: sqlxDB,
+	}
+
+	return &queries{
+		authorsQueries{baseDB},
 	}, nil
 }
 

@@ -11,5 +11,6 @@ require (
 	github.com/jpz13/service v0.0.0-20190320203553-617aa6859d68
 	github.com/lib/pq v1.2.0
 	github.com/pmezard/go-difflib v1.0.0
+	github.com/satori/go.uuid v1.2.0
 	github.com/stretchr/testify v0.0.0-20190311161405-34c6fa2dc709
 )

@@ -8,17 +8,17 @@ import (
 
 type baseResource struct {
 	logger  log.Logger
-	service core.DummyService
+	service core.Service
 }
 
 // Resources holds api resources
 type Resources struct {
-	dummyResource
+	authorsResource
 }
 
 // Config holds api resource config
 type Config struct {
-	DummyService core.DummyService
+	DummyService core.Service
 	Logger       log.Logger
 }
 
@@ -30,6 +30,6 @@ func NewResources(config *Config) Resources {
 	}
 
 	return Resources{
-		dummyResource{br},
+		authorsResource{br},
 	}
 }

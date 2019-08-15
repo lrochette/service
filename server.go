@@ -42,7 +42,7 @@ func newServer(config *serverConfig) (*server, error) {
 		return nil, err
 	}
 
-	dummyService := core.NewDummyService(&core.Config{
+	dummyService := core.New(&core.Config{
 		DB: db,
 	})
 
