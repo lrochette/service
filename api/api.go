@@ -33,9 +33,10 @@ func New(config *Config) http.Handler {
 	api.Consumes(restful.MIME_JSON)
 	api.Produces(restful.MIME_JSON)
 
-	// authors endpoints
+	// authors and posts endpoints
 	api.Route(api.POST("/authors").To(resources.CreateAuthor))
 	api.Route(api.GET("/authors/{author-id}").To(resources.GetAuthor))
+	api.Route(api.POST("/authors/{author-id}/posts").To(resources.CreatePost))
 	container.Add(api)
 
 	return container

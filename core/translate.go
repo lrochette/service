@@ -19,3 +19,19 @@ func translateDBAuthorToAuthorResponse(dbAuthor *dbmodel.Author) *model.AuthorRe
 		UUID:      dbAuthor.UUID,
 	}
 }
+
+func translateCreatePostRequestToDBPost(authorID string, post *model.CreatePostRequest) *dbmodel.Post {
+	return &dbmodel.Post{
+		AuthorUUID: authorID,
+		Body:       post.Body,
+	}
+}
+
+func translateDBPostToPostResponse(dbpost *dbmodel.Post) *model.PostResponse {
+	return &model.PostResponse{
+		AuthorUUID: dbpost.AuthorUUID,
+		Body:       dbpost.Body,
+		Timestamp:  dbpost.Timestamp,
+		PostUUID:   dbpost.PostUUID,
+	}
+}

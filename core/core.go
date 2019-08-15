@@ -14,10 +14,12 @@ type Config struct {
 // Service holds core methods
 type Service interface {
 	AuthorsService
+	PostsService
 }
 
 type coreService struct {
 	authorsService
+	postsService
 }
 
 type baseService struct {
@@ -33,5 +35,6 @@ func New(config *Config) Service {
 
 	return &coreService{
 		authorsService{base},
+		postsService{base},
 	}
 }

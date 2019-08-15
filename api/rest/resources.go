@@ -14,6 +14,7 @@ type baseResource struct {
 // Resources holds api resources
 type Resources struct {
 	authorsResource
+	postsResource
 }
 
 // Config holds api resource config
@@ -31,5 +32,6 @@ func NewResources(config *Config) Resources {
 
 	return Resources{
 		authorsResource{br},
+		postsResource{br},
 	}
 }

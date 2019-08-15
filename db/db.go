@@ -31,10 +31,12 @@ type Config struct {
 // Database holds methods to interact with the db
 type Database interface {
 	Authors
+	Posts
 }
 
 type queries struct {
 	authorsQueries
+	postsQueries
 }
 
 type database struct {
@@ -63,6 +65,7 @@ func New(config *Config) (Database, error) {
 
 	return &queries{
 		authorsQueries{baseDB},
+		postsQueries{baseDB},
 	}, nil
 }
 
