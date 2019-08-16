@@ -29,3 +29,17 @@ func (r *postsResource) CreatePost(request *restful.Request, response *restful.R
 
 	response.WriteHeaderAndEntity(http.StatusCreated, res)
 }
+
+// GetPost is the decoding/error layer to get a post
+func (r *postsResource) GetPost(request *restful.Request, response *restful.Response) {
+	authorID := request.PathParameter("author-id")
+	postID := request.PathParameter("post-id")
+
+	ctx := context.Background()
+	res, err := r.service.GetPost(ctx, authorID, postID)
+	if err != nil {
+		encodeErrorWithStatus(response, err, http.StatusBadRequest)
+	}
+
+	response.WriteHeaderAndEntity(http.StatusCreated, res)
+}

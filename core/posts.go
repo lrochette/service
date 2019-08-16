@@ -10,6 +10,7 @@ import (
 // PostsService holds methods related to authors
 type PostsService interface {
 	CreatePost(ctx context.Context, authorID string, post *model.CreatePostRequest) (*model.PostResponse, error)
+	GetPost(ctx context.Context, authorUUID, postUUID string) (*model.PostResponse, error)
 }
 
 type postsService struct {
@@ -30,7 +31,20 @@ func (s *authorsService) CreatePost(ctx context.Context, authorID string, post *
 	}
 
 	// get post from db to populate response
-	dbPost, err = s.db.GetPost(ctx, dbPost.PostUUID)
+	dbPost, err = s.db.GetPost(ctx, authorID, dbPost.PostUUID)
+	if err != nil {
+		return nil, err
+	}
+
+	response := translateDBPostToPostResponse(dbPost)
+
+	return response, nil
+}
+
+// GetPost gets a post from the db based on ids
+func (s *authorsService) GetPost(ctx context.Context, authorUUID, postUUID string) (*model.PostResponse, error) {
+	// get post from db to populate response
+	dbPost, err := s.db.GetPost(ctx, authorUUID, postUUID)
 	if err != nil {
 		return nil, err
 	}

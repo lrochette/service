@@ -37,6 +37,7 @@ func New(config *Config) http.Handler {
 	api.Route(api.POST("/authors").To(resources.CreateAuthor))
 	api.Route(api.GET("/authors/{author-id}").To(resources.GetAuthor))
 	api.Route(api.POST("/authors/{author-id}/posts").To(resources.CreatePost))
+	api.Route(api.GET("/authors/{author-id}/posts/{post-id}").To(resources.GetPost))
 	container.Add(api)
 
 	return container
