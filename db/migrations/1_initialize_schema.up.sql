@@ -7,7 +7,7 @@ CREATE TABLE authors (
 
 CREATE TABLE posts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  author_uuid UUID FOREIGN KEY,
+  author_uuid UUID REFERENCES authors(uuid),
   timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
   body TEXT,
   uuid UUID UNIQUE NOT NULL

@@ -20,7 +20,7 @@ type postsClient struct {
 
 // CreatePost is the client to create a post
 func (c *postsClient) CreatePost(ctx context.Context, authorUUID string, post *model.CreatePostRequest) (*model.PostResponse, error) {
-	url := c.serviceURI + v1API + fmt.Sprintf("/users/%s/posts", authorUUID)
+	url := c.serviceURI + v1API + fmt.Sprintf("/authors/%s/posts", authorUUID)
 
 	req, err := formatJSONRequest(http.MethodPost, url, post)
 	if err != nil {
@@ -34,7 +34,7 @@ func (c *postsClient) CreatePost(ctx context.Context, authorUUID string, post *m
 
 // GetPost is the client to get a post
 func (c *postsClient) GetPost(ctx context.Context, authorUUID, postUUID string) (*model.PostResponse, error) {
-	url := c.serviceURI + v1API + fmt.Sprintf("/users/%s/posts/%s", authorUUID, postUUID)
+	url := c.serviceURI + v1API + fmt.Sprintf("/authors/%s/posts/%s", authorUUID, postUUID)
 
 	req, err := formatJSONRequest(http.MethodGet, url, nil)
 	if err != nil {

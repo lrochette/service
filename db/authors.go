@@ -29,9 +29,8 @@ func (q *authorsQueries) CreateAuthor(ctx context.Context, author *model.Author)
 // GetAuthor gets an author row by the uuid
 func (q *authorsQueries) GetAuthor(ctx context.Context, authorID string) (*model.Author, error) {
 	author := &model.Author{}
-	err := q.db.Get(author, `SELECT (first_name, last_name, uuid)
+	err := q.db.Get(author, `SELECT first_name, last_name, uuid
 			FROM authors WHERE uuid=$1`,
 		authorID)
-
 	return author, err
 }

@@ -18,7 +18,7 @@ RUN go build -o service
 
 FROM alpine:3.10
 
-RUN apk add --no-cache ca-certificates bash
+RUN apk add --no-cache ca-certificates postgresql-client bash
 # copy binary
 COPY --from=builder /app /
 # copy db migrations
