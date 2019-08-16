@@ -18,7 +18,7 @@ type postsService struct {
 }
 
 // CreatePost creates a post
-func (s *authorsService) CreatePost(ctx context.Context, authorID string, post *model.CreatePostRequest) (*model.PostResponse, error) {
+func (s *postsService) CreatePost(ctx context.Context, authorID string, post *model.CreatePostRequest) (*model.PostResponse, error) {
 	dbPost := translateCreatePostRequestToDBPost(authorID, post)
 
 	// generate uuid
@@ -42,7 +42,7 @@ func (s *authorsService) CreatePost(ctx context.Context, authorID string, post *
 }
 
 // GetPost gets a post from the db based on ids
-func (s *authorsService) GetPost(ctx context.Context, authorUUID, postUUID string) (*model.PostResponse, error) {
+func (s *postsService) GetPost(ctx context.Context, authorUUID, postUUID string) (*model.PostResponse, error) {
 	// get post from db to populate response
 	dbPost, err := s.db.GetPost(ctx, authorUUID, postUUID)
 	if err != nil {
