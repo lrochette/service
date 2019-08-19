@@ -19,15 +19,15 @@ type Resources struct {
 
 // Config holds api resource config
 type Config struct {
-	DummyService core.Service
-	Logger       log.Logger
+	Core   core.Service
+	Logger log.Logger
 }
 
 // NewResources inits api resources
 func NewResources(config *Config) Resources {
 	br := baseResource{
 		logger:  config.Logger,
-		service: config.DummyService,
+		service: config.Core,
 	}
 
 	return Resources{

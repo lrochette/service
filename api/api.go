@@ -11,16 +11,16 @@ import (
 
 // Config holds api configuration
 type Config struct {
-	DummyService core.Service
-	Logger       log.Logger
+	Core   core.Service
+	Logger log.Logger
 }
 
 // New inits an api
 func New(config *Config) http.Handler {
 
 	resources := rest.NewResources(&rest.Config{
-		DummyService: config.DummyService,
-		Logger:       config.Logger,
+		Core:   config.Core,
+		Logger: config.Logger,
 	})
 	container := restful.NewContainer()
 

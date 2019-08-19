@@ -42,13 +42,13 @@ func newServer(config *serverConfig) (*server, error) {
 		return nil, err
 	}
 
-	dummyService := core.New(&core.Config{
+	coreService := core.New(&core.Config{
 		DB: db,
 	})
 
 	apiHandler := api.New(&api.Config{
-		DummyService: dummyService,
-		Logger:       config.Logger,
+		Core:   coreService,
+		Logger: config.Logger,
 	})
 
 	return &server{
