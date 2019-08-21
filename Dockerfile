@@ -20,7 +20,7 @@ FROM alpine:3.10
 
 RUN apk add --no-cache ca-certificates postgresql-client bash
 # copy binary
-COPY --from=builder /app /
+COPY --from=builder /app/service /
 # copy db migrations
 COPY --from=builder /app/db/migrations /migrations
 
